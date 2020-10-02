@@ -13,8 +13,6 @@ parser.add_argument('--n_hid', type=int, default=128,
                     help='hidden size of recurrent net')
 parser.add_argument('--T', type=int, default=100,
                     help='length of sequences')
-parser.add_argument('--random_seed', type=int,
-                    default=1, help='random seed')
 parser.add_argument('--max_steps', type=int, default=60000,
                     help='max learning steps')
 parser.add_argument('--log_interval', type=int, default=100,
@@ -33,9 +31,6 @@ parser.add_argument('--epsilon',type=float, default = 15,
                     help='z controle parameter <epsilon> of the coRNN')
 
 args = parser.parse_args()
-
-torch.cuda.manual_seed(args.random_seed)
-torch.manual_seed(args.random_seed)
 
 n_inp = 2
 n_out = 1

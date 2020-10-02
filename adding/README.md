@@ -13,7 +13,6 @@ python adding_task.py [args]
 Options:
 - nhid : hidden size of recurrent net
 - T : length of sequences
-- random_seed : random seed
 - max_steps : max learning steps
 - log_interval : log interval
 - batch : batch size
