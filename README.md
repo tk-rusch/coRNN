@@ -1,5 +1,7 @@
 # Coupled Oscillatory Recurrent Neural Network (coRNN): An accurate and (gradient) stable architecture for learning long time dependencies
-This repository contains the implementations to reproduce the numerical experiments of the coRNN preprint.
+This repository contains the implementation to reproduce the numerical experiments 
+of the paper [Coupled Oscillatory Recurrent Neural Network (coRNN): An accurate and (gradient) stable architecture for learning long time dependencies](https://arxiv.org/pdf/2010.00951.pdf)
+
 
 
 ## Requirements
