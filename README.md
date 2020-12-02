@@ -45,11 +45,11 @@ The results of the coRNN for each of the experiments are:
   </tr>
   <tr>
     <td>psMNIST </td>
-    <td> 97.34% test accuarcy </td>
+    <td> 97.3% test accuarcy </td>
   </tr>
     <tr>
     <td>Noisy CIFAR10</td>
-    <td> 58.2% test accuracy </td>
+    <td> 59.0% test accuracy </td>
   </tr>
   <tr>
     <td>HAR-2</td>
