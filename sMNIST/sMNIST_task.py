@@ -27,6 +27,8 @@ parser.add_argument('--epsilon', type=float, default=4.7,
 args = parser.parse_args()
 print(args)
 
+torch.manual_seed(46159)
+
 n_inp = 1
 n_out = 10
 bs_test = 1000
