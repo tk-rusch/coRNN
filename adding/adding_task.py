@@ -52,7 +52,6 @@ def test():
     return loss.item()
 
 def train():
-    model.train()
     test_mse = []
     for i in range(args.max_steps):
         data, label = utils.get_batch(args.T,args.batch)
@@ -68,6 +67,7 @@ def train():
             mse_error = test()
             print('Test MSE: {:.6f}'.format(mse_error))
             test_mse.append(mse_error)
+            model.train()
 
 if __name__ == '__main__':
     train()
