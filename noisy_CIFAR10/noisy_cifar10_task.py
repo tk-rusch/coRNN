@@ -4,12 +4,13 @@ import utils
 import network
 import argparse
 import torch.nn.utils
+from pathlib import Path
 
 parser = argparse.ArgumentParser(description='training parameters')
 
 parser.add_argument('--n_hid', type=int, default=128,
                     help='hidden size of recurrent net')
-parser.add_argument('--epochs', type=int, default=250,
+parser.add_argument('--epochs', type=int, default=120,
                     help='max epochs')
 parser.add_argument('--batch', type=int, default=100,
                     help='batch size')
@@ -19,7 +20,7 @@ parser.add_argument('--dt', type=float, default=0.034,
                     help='step size <dt> of the coRNN')
 parser.add_argument('--gamma', type=float, default=1.3,
                     help='y controle parameter <gamma> of the coRNN')
-parser.add_argument('--epsilon', type=float, default=6.4,
+parser.add_argument('--epsilon', type=float, default=12.7,
                     help='z controle parameter <epsilon> of the coRNN')
 
 args = parser.parse_args()
@@ -53,8 +54,8 @@ def test(data_loader):
 
     return accuracy.item()
 
-## train the model:
-for e in range(args.epochs):
+best_eval = 0
+for epoch in range(args.epochs):
     model.train()
     for i, (images, labels) in enumerate(train_loader):
         ## Reshape images for sequence learning:
@@ -65,7 +66,24 @@ for e in range(args.epochs):
         loss = objective(output, labels)
         loss.backward()
         optimizer.step()
-    eval_acc = test(valid_loader)
-    test_acc = test(test_loader)
-    print('Valid set: Accuracy: {:.2f}%\n'.format(eval_acc))
-    print('Test set:  Accuracy: {:.2f}%\n'.format(test_acc))
+
+    valid_acc = test(valid_loader)
+    if (valid_acc > best_eval):
+        test_acc = test(test_loader)
+
+    Path('result').mkdir(parents=True, exist_ok=True)
+    f = open('result/noisy_cifar_log.txt', 'a')
+    if (epoch == 0):
+        f.write('## learning rate = ' + str(args.lr) + ', dt = ' + str(args.dt) + ', gamma = ' + str(
+            args.gamma) + ', epsilon = ' + str(args.epsilon) + '\n')
+    f.write('eval accuracy: ' + str(round(valid_acc, 2)) + '\n')
+    f.close()
+
+    if (epoch + 1) % 100 == 0:
+        args.lr /= 10.
+        for param_group in optimizer.param_groups:
+            param_group['lr'] = args.lr
+
+f = open('result/noisy_cifar_log.txt', 'a')
+f.write('final test accuracy: ' + str(round(test_acc, 2)) + '\n')
+f.close()
