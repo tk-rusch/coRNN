@@ -58,7 +58,7 @@ def test(data_loader):
 
     return accuracy.item()
 
-best_eval = 0
+best_eval = 0.
 for epoch in range(args.epochs):
     model.train()
     for i, (images, labels) in enumerate(train_loader):
@@ -74,6 +74,7 @@ for epoch in range(args.epochs):
 
     valid_acc = test(valid_loader)
     if(valid_acc > best_eval):
+        best_eval = valid_acc
         test_acc = test(test_loader)
 
     Path('result').mkdir(parents=True, exist_ok=True)
