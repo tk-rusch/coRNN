@@ -70,6 +70,7 @@ for epoch in range(args.epochs):
         optimizer.step()
 
     valid_acc = test(valid_loader)
+    test_acc = test(test_loader)
     Path('result').mkdir(parents=True, exist_ok=True)
     f = open('result/sMNIST_log.txt', 'a')
     if (epoch == 0):
@@ -82,7 +83,6 @@ for epoch in range(args.epochs):
         for param_group in optimizer.param_groups:
             param_group['lr'] = args.lr
 
-test_acc = test(test_loader)
 f = open('result/sMNIST_log.txt', 'a')
 f.write('final test accuracy: ' + str(round(test_acc, 2)) + '\n')
 f.close()
