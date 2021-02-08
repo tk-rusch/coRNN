@@ -68,9 +68,10 @@ for epoch in range(args.epochs):
         optimizer.step()
 
     valid_acc = test(valid_loader)
+    test_acc = test(test_loader)
     if (valid_acc > best_eval):
         best_eval = valid_acc
-        test_acc = test(test_loader)
+        final_test_acc = test_acc
 
     Path('result').mkdir(parents=True, exist_ok=True)
     f = open('result/noisy_cifar_log.txt', 'a')
@@ -86,5 +87,5 @@ for epoch in range(args.epochs):
             param_group['lr'] = args.lr
 
 f = open('result/noisy_cifar_log.txt', 'a')
-f.write('final test accuracy: ' + str(round(test_acc, 2)) + '\n')
+f.write('final test accuracy: ' + str(round(final_test_acc, 2)) + '\n')
 f.close()
