@@ -59,3 +59,14 @@ The results of the coRNN for each of the experiments are:
     <td> 87.4% test accuracy </td>
   </tr>
 </table>
+
+## Citation
+
+```bibtex
+@article{rusch2020coupled,
+  title={Coupled Oscillatory Recurrent Neural Network (coRNN): An accurate and (gradient) stable architecture for learning long time dependencies},
+  author={Rusch, T Konstantin and Mishra, Siddhartha},
+  journal={arXiv preprint arXiv:2010.00951},
+  year={2020}
+}
+```
