@@ -1,4 +1,7 @@
-# Coupled Oscillatory Recurrent Neural Network (coRNN)
+<h1 align='center'> Coupled Oscillatory Recurrent Neural Network (coRNN)<br>
+    [ICLR 2021 Oral] </h1>
+
+
 This repository contains the implementation to reproduce the numerical experiments 
 of the *International Conference on Learning Representations (ICLR) 2021* **[oral]** paper [Coupled Oscillatory Recurrent Neural Network (coRNN): An accurate and (gradient) stable architecture for learning long time dependencies](https://openreview.net/forum?id=F3s69XzWOia)
 
@@ -7,14 +10,36 @@ of the *International Conference on Learning Representations (ICLR) 2021* **[ora
 ## Requirements
 
 ```bash
-Python 3.6.1
-pytorch 1.3.1
-torchvision 0.4.2
-torchtext 0.6.0
-numpy 1.17.4
+pytorch 1.3+
+torchvision 0.4+
+torchtext 0.6+
+numpy 1.17+
 spacy v2.2+
 ```
 If you want to run the experiments on a GPU, please make sure you have installed the corresponding cuda packages.
+
+
+## Example
+The coRNN cell can be implemented in pytorch as easy as this: 
+```python
+from torch import nn
+import torch
+
+class coRNNCell(nn.Module):
+    def __init__(self, n_inp, n_hid, dt, gamma=1., epsilon=1.):
+        super(coRNNCell, self).__init__()
+        self.dt = dt
+        self.gamma = gamma
+        self.epsilon = epsilon
+        self.i2h = nn.Linear(n_inp + n_hid + n_hid, n_hid)
+
+    def forward(self,x,hy,hz):
+        hz = hz + self.dt * (torch.tanh(self.i2h(torch.cat((x, hz, hy),1)))
+                                   - self.gamma * hy - self.epsilon * hz)
+        hy = hy + self.dt * hz
+
+        return hy, hz
+```
 
 
 ## Datasets
@@ -63,10 +88,10 @@ The results of the coRNN for each of the experiments are:
 ## Citation
 
 ```bibtex
-@article{rusch2020coupled,
+@inproceedings{rusch2021coupled,
   title={Coupled Oscillatory Recurrent Neural Network (coRNN): An accurate and (gradient) stable architecture for learning long time dependencies},
   author={Rusch, T Konstantin and Mishra, Siddhartha},
-  journal={arXiv preprint arXiv:2010.00951},
-  year={2020}
+  booktitle={International Conference on Learning Representations},
+  year={2021}
 }
 ```
