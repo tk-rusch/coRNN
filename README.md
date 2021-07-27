@@ -86,7 +86,7 @@ The results of the coRNN for each of the experiments are:
 </table>
 
 ## Citation
-
+If you found this work useful, please consider citing
 ```bibtex
 @inproceedings{rusch2021coupled,
   title={Coupled Oscillatory Recurrent Neural Network (coRNN): An accurate and (gradient) stable architecture for learning long time dependencies},
