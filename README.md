@@ -90,7 +90,7 @@ If you found this work useful, please consider citing
 ```bibtex
 @inproceedings{rusch2021coupled,
   title={Coupled Oscillatory Recurrent Neural Network (coRNN): An accurate and (gradient) stable architecture for learning long time dependencies},
-  author={Rusch, T Konstantin and Mishra, Siddhartha},
+  author={Rusch, T. Konstantin and Mishra, Siddhartha},
   booktitle={International Conference on Learning Representations},
   year={2021}
 }
